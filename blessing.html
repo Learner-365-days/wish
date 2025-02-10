@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>温馨祝福</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #FFB6C1 0%, #87CEEB 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Microsoft YaHei', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 5%;
+            border-radius: 5%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+            z-index: 1;
+            /* 设置一个合适的最小高度，确保能容纳所有祝福语 */
+            min-height: 400px; 
+        }
+        h1 {
+            color: #FF69B4;
+            font-size: 8vw;
+            margin-bottom: 5%;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        p {
+            font-size: 4vw;
+            line-height: 1.8;
+            color: #333;
+            margin: 3% 0;
+            display: none; /* 初始设置为隐藏 */
+        }
+        .emoji {
+            font-size: 10vw;
+            margin: 5% 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 媒体查询，针对大屏幕设备调整字体大小 */
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            p {
+                font-size: 1.2em;
+            }
+            .emoji {
+                font-size: 3em;
+            }
+        }
+
+        /* 烟花动画样式 */
+       .firework {
+            position: absolute;
+            width: 10px; /* 增大烟花尺寸 */
+            height: 10px; /* 增大烟花尺寸 */
+            border-radius: 50%;
+            animation: firework 1s ease-out forwards; /* 添加 forwards 让动画结束后保持最后状态 */
+            pointer-events: none;
+            z-index: 2; /* 确保烟花在.card之上 */
+            opacity: 0; /* 初始透明度为 0 */
+            transition: opacity 0.2s; /* 添加透明度过渡效果 */
+        }
+        @keyframes firework {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y));
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 添加音频标签 -->
+    <audio id="background-music" autoplay loop>
+        <source src="local_music.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放。
+    </audio>
+    <div class="card">
+        <div class="emoji">🎁🎉🎂</div>
+        <h1>亲爱的朋友</h1>
+        <p id="wish-1">愿你三冬暖，愿你春不寒</p>
+        <p id="wish-2">愿你天黑有灯，下雨有伞</p>
+        <p id="wish-3">愿你路上有良人相伴</p>
+        <p id="wish-4">愿你所有快乐无需假装</p>
+        <p id="wish-5">愿你此生尽兴、赤诚善良</p>
+        <div class="emoji">💖🌈🌟</div>
+    </div>
+    <script>
+        const wishes = [
+            document.getElementById('wish-1'),
+            document.getElementById('wish-2'),
+            document.getElementById('wish-3'),
+            document.getElementById('wish-4'),
+            document.getElementById('wish-5')
+        ];
+
+        let index = 0;
+
+        // 先隐藏所有祝福语
+        wishes.forEach(wish => { wish.style.display = 'none'; });
+
+        const createFirework = () => {
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            // 控制烟花位置范围，减少重叠
+            const padding = 10;
+            firework.style.left = `${padding + Math.random() * (100 - 2 * padding)}vw`;
+            firework.style.top = `${padding + Math.random() * (100 - 2 * padding)}vh`;
+            firework.style.setProperty('--x', `${(Math.random() - 0.5) * 300}px`); // 增大烟花扩散范围
+            firework.style.setProperty('--y', `${(Math.random() - 0.5) * 300}px`); // 增大烟花扩散范围
+            firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(firework);
+            // 让烟花先显示
+            setTimeout(() => {
+                firework.style.opacity = 1;
+            }, 0);
+            // 动画结束后移除元素
+            setTimeout(() => {
+                firework.remove();
+            }, 1000);
+        };
+
+        // 启动初始烟花动画
+        for (let i = 0; i < 20; i++) {
+            createFirework();
+        }
+
+        // 启动循环烟花动画
+        setInterval(() => {
+            for (let i = 0; i < 20; i++) {
+                createFirework();
+            }
+        }, 2000);
+
+        const showNextWish = () => {
+            // 隐藏之前显示的祝福语
+            if (index > 0) {
+                wishes[index - 1].style.display = 'none';
+            }
+            if (index < wishes.length) {
+                // 触发烟花动画
+                for (let i = 0; i < 20; i++) {
+                    createFirework();
+                }
+                wishes[index].style.display = 'block';
+                index++;
+                setTimeout(showNextWish, 2000); // 每 2 秒显示一行
+            } else {
+                // 所有祝福语显示完后，显示全部祝福语
+                wishes.forEach(wish => { wish.style.display = 'block'; });
+            }
+        };
+
+        showNextWish();
+    </script>
+</body>
+</html>
