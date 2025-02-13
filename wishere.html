@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>温馨祝福</title>
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #FFB6C1 0%, #87CEEB 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Microsoft YaHei', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+       .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 5%;
+            border-radius: 5%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+            z-index: 1;
+            /* 设置一个合适的最小高度，确保能容纳所有祝福语 */
+            min-height: 400px; 
+        }
+        h1 {
+            color: #FF69B4;
+            font-size: 6vw;
+            margin-bottom: 5%;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        p {
+            font-size: 6vw;
+            line-height: 1.8;
+            color: #333;
+            margin: 3% 0;
+            display: none; /* 初始设置为隐藏 */
+        }
+       .emoji {
+            font-size: 10vw;
+            margin: 5% 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 媒体查询，针对大屏幕设备调整字体大小 */
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 2em;
+            }
+           .emoji {
+                font-size: 3em;
+            }
+        }
+
+        /* 烟花动画样式 */
+       .firework {
+            position: absolute;
+            width: 10px; /* 增大烟花尺寸 */
+            height: 10px; /* 增大烟花尺寸 */
+            border-radius: 50%;
+            animation: firework 1s ease-out forwards; /* 添加 forwards 让动画结束后保持最后状态 */
+            pointer-events: none;
+            z-index: 2; /* 确保烟花在.card 之上 */
+            opacity: 0; /* 初始透明度为 0 */
+            transition: opacity 0.2s; /* 添加透明度过渡效果 */
+        }
+        @keyframes firework {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y));
+                opacity: 0;
+            }
+        }
+
+        /* 优化按钮样式 */
+       .music-button {
+            background-color: #FF69B4;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+       .music-button:hover {
+            background-color: #FF1493;
+        }
+    </style>
+</head>
+<body>
+    <!-- 添加音频标签 -->
+    <audio id="background-music" loop>
+        <source src="https://learner-365-days.github.io/wish/basic.mp3" type="audio/mpeg">
+        您的浏览器不支持音频播放。
+    </audio>
+    <button id="playButton" class="music-button">
+        <i class="fa-solid fa-play"></i>
+    </button>
+    <div class="card">
+        <div class="emoji">🎁🎉🎂</div>
+        <h1>亲爱的王先生</h1>
+        <p id="wish-1">经过好些日子的反复摸索钻研</p><p id="wish-2">终于制作出</p><p id="wish-3">这个承载心意的二维码</p><p id="wish-4">很开心我们出现在彼此生命里</p><p id="wish-5">成为彼此最重要的人</p><p id="wish-6">也许随着时间的流逝</p><p id="wish-7">我们的新鲜感会慢慢褪去</p><p id="wish-8">会产生倦意</p><p id="wish-9">会发现彼此很多的缺点</p><p id="wish-10">但不管怎样</p><p id="wish-11">我们都能够彼此珍惜</p><p id="wish-12">依然信任</p><p id="wish-13">互相理解</p><p id="wish-14">相互沟通</p><p id="wish-15">只要你不放手</p><p id="wish-16">我就会一直陪着你</p><p id="wish-17">你做饭，我洗碗</p><p id="wish-18">你拖地，我洗衣</p><p id="wish-19">平平淡淡</p><p id="wish-20">我们会慢慢而又长长的爱对方</p><p id="wish-21">周而复始</p><p id="wish-22">此刻</p><p id="wish-23">你想用语言还是动作来表示心意</p><p id="wish-24">都听你的</p><p id="wish-25">因为在我心里</p><p id="wish-26">爱的人说什么都是对的</p><p id="wish-27">情人节快乐！</p><p id="wish-28">幸甚遇你，成此归依</p><p id="wish-29">时光虽逝，信任不移</p><p id="wish-30">柴米相伴，爱意弥弥</p><p id="wish-31">君言皆诺，余生可期</p>
+        <div class="emoji">💖🌈🌟</div>
+    </div>
+    <script>
+        const wishes = [
+            document.getElementById('wish-1'), document.getElementById('wish-2'), document.getElementById('wish-3'), document.getElementById('wish-4'), document.getElementById('wish-5'), document.getElementById('wish-6'), document.getElementById('wish-7'), document.getElementById('wish-8'), document.getElementById('wish-9'), document.getElementById('wish-10'), document.getElementById('wish-11'), document.getElementById('wish-12'), document.getElementById('wish-13'), document.getElementById('wish-14'), document.getElementById('wish-15'), document.getElementById('wish-16'), document.getElementById('wish-17'), document.getElementById('wish-18'), document.getElementById('wish-19'), document.getElementById('wish-20'), document.getElementById('wish-21'), document.getElementById('wish-22'), document.getElementById('wish-23'), document.getElementById('wish-24'), document.getElementById('wish-25'), document.getElementById('wish-26')
+        ];
+
+        const last_five_wishes = [
+            document.getElementById('wish-27'), document.getElementById('wish-28'), document.getElementById('wish-29'), document.getElementById('wish-30'), document.getElementById('wish-31')
+        ];
+
+        let index = 0;
+
+        // 先隐藏所有祝福语
+        wishes.forEach(wish => { wish.style.display = 'none'; });
+        last_five_wishes.forEach(wish => { wish.style.display = 'none'; });
+
+        const createFirework = () => {
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            // 控制烟花位置范围，减少重叠
+            const padding = 10;
+            firework.style.left = `${padding + Math.random() * (100 - 2 * padding)}vw`;
+            firework.style.top = `${padding + Math.random() * (100 - 2 * padding)}vh`;
+            firework.style.setProperty('--x', `${(Math.random() - 0.5) * 300}px`); // 增大烟花扩散范围
+            firework.style.setProperty('--y', `${(Math.random() - 0.5) * 300}px`); // 增大烟花扩散范围
+            firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(firework);
+            // 让烟花先显示
+            setTimeout(() => {
+                firework.style.opacity = 1;
+            }, 0);
+            // 动画结束后移除元素
+            setTimeout(() => {
+                firework.remove();
+            }, 1000);
+        };
+
+        // 启动初始烟花动画
+        for (let i = 0; i < 20; i++) {
+            createFirework();
+        }
+
+        // 启动循环烟花动画
+        setInterval(() => {
+            for (let i = 0; i < 20; i++) {
+                createFirework();
+            }
+        }, 2000);
+
+        const showNextWish = () => {
+            // 隐藏之前显示的祝福语
+            if (index > 0) {
+                wishes[index - 1].style.display = 'none';
+            }
+            if (index < wishes.length) {
+                // 触发烟花动画
+                for (let i = 0; i < 20; i++) {
+                    createFirework();
+                }
+                wishes[index].style.display = 'block';
+                index++;
+                setTimeout(showNextWish, 6000); // 每 6 秒显示一行
+            } else {
+                // 隐藏所有普通祝福语
+                wishes.forEach(wish => {
+                    wish.style.display = 'none';
+                });
+                // 显示最后 5 条自定义祝福语
+                last_five_wishes.forEach(wish => {
+                    wish.style.display = 'block';
+                });
+                // 滚动到最后一条祝福语的位置
+                last_five_wishes[last_five_wishes.length - 1].scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+
+        showNextWish();
+
+        const playButton = document.getElementById('playButton');
+        const audio = document.getElementById('background-music');
+        let isPlaying = false;
+
+        playButton.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playButton.innerHTML = '<i class="fa-solid fa-play"></i>';
+            } else {
+                audio.play();
+                playButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
+</body>
+</html>
